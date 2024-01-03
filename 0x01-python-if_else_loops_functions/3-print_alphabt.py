@@ -1,4 +1,4 @@
 #!/usr/bin/python3
-output = ''.join(chr(i) for i in range(ord('a'), ord('z') + 1))
-if 'q' not in output and 'e' not in output:
-    print("{}".format(output), end='')
+output = ''.join(chr(i) for i in range(ord('a'), ord('z') + 1)\
+if chr(i) not in {'q', 'e'})
+print("{}".format(output), end='')
