@@ -11,7 +11,7 @@ def roman_to_int(roman_string):
         current_value = roman_numerals[numeral]
 
         if current_value >= prev_value:
-            total += curent_value
+            total += current_value
         else:
             total -= current_value
 
