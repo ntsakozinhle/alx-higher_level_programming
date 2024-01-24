@@ -2,6 +2,7 @@
 """This module defines a Magic class."""
 import math
 
+
 class MagicClass:
     """
     A class that represents a magical circle with radius.
@@ -29,7 +30,7 @@ class MagicClass:
         """
         self.radius = 0
 
-        if type(radius) is not int and type (radius) is not float:
+        if type(radius) is not int and type(radius) is not float:
             raise TypeError('radius must be a number')
 
         self.__radius = radius
