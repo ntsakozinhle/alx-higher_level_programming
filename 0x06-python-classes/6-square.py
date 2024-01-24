@@ -8,7 +8,8 @@ class Square:
 
     Attributes:
         __size (int): Private attribute representing the size of the square
-        __position (tuple): Private attribute representing the position of the square
+        __position (tuple): Private attribute representing the position of
+        the square
     """
 
     def __init__(self, size=0, position=(0, 0)):
@@ -16,10 +17,11 @@ class Square:
 
         Args:
             size (int, optional): The size of the square. Defaults to 0.
-            position (tuple, optional): the position of the square. Defaults to (0, 0)
+            position (tuple, optional): the position of the square.
+            Defaults to (0, 0)
         """
         self.size = size
-        self.position =position
+        self.position = position
 
     @property
     def size(self):
