@@ -36,7 +36,7 @@ class Square:
             TypeError: if the value is not a number (float or int)
             ValueErrorr: if the value is less than 0
         """
-        if not is instance(value, (float, int)):
+        if not isinstance(value, (float, int)):
             raise TypeError("size must be a number")
         elif value < 0:
             raise ValueError("size must be >= 0")
