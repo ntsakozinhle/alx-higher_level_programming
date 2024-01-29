@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+"""
+Test cases for the 2-matrix_divided module.
+"""
+
+import 2-main.py import matrix_divided
+
+doctest.testmod(matrix_divided)
