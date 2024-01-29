@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+"""
+Test cases for the 5-text_indentation module.
+"""
+
+import doctest
+from 5-main.py import tect_indentation
+
+doctest.testmod(text_indentation)
