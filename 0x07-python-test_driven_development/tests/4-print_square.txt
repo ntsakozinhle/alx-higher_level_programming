@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+"""
+Test cases for the 4-print_square module.
+"""
+
+import doctest
+from 4-main import print_square
+
+doctest.testmod(print_square)
