@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+"""
+Test cases for the 3-say_my_name module.
+"""
+
+import doctest from 3-main.py import say_my_name
+
+doctest.testmod(say_my_name)
