@@ -1,0 +1,10 @@
+#!/usr/bin/python3
+"""
+Test cases for the 0-add_integer module.
+"""
+
+
+import doctest
+from 0-main import add_integer
+
+doctest.testmod(add_integer)
