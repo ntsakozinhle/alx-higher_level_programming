@@ -94,8 +94,7 @@ class Rectangle:
         Return:
             int: Perimeter of the rectangle (2 * (width + height)).
         """
-        return 2 * (self.__width + self.height)
-    if self.__width != 0 and self.__height != 0 else 0
+        return 2 * (self.__width + self.height) if self.__width != 0 and self.__height != 0 else 0
 
     def __str__(self):
         """
@@ -106,7 +105,7 @@ class Rectangle:
         """
         if self.__width == 0 or self.__height == 0:
             return ""
-        return "\n".joint(['#' * self.__width for _ in range(self.__height)])
+        return "\n".join(['#' * self.__width for _ in range(self.__height)])
 
     def __repr__(self):
         """
