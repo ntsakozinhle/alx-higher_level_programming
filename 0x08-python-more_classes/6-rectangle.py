@@ -134,5 +134,5 @@ class Rectangle:
         """
         Deletes an instance of Rectangle and prints a farewell message
         """
-        Rectangle.number_of_intances -= 1
+        Rectangle.number_of_instances -= 1
         print("Bye rectangle...")
