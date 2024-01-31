@@ -23,8 +23,11 @@ def add_integer(a, b=98):
 
     """
     if type(a) not in (int, float):
-        raise TypeError("a must be an integer or b must be an integer")
+        raise TypeError("a must be an integer")
     if type(b) not in (int, float):
-        raise TypeError("a must be an integer or b must be an integer")
+        raise TypeError("b must be an integer")
 
     return int(a) + int(b)
+
+if __name__ == "__main__":
+    pass
