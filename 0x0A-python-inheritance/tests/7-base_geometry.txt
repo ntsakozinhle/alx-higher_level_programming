@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+"""
+Test cases for 7-base_geometry.py
+"""
+
+
+BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+bg = BaseGeometry()
+assert str(bg) == "[BaseGeometry]", "Test Case 1 Failed"
+
+try:
+	bg.area()
+except Exception as e:
+	assert str(e) == "area() is not implemented", "Test Case 2 Failed"
+
+try:
+	bg.integer_validator("test", "string")
+except TypeError as e:
+	assert str(e) == "test must be an integer", "Test Case 3 Failed"
+
+try:
+	bg.integer_validator("test", -5)
+except ValueError as e:
+	assert str(e) == "test must be greater than 0", "Test Case 4 Failed"
+
+try:
+	bg.integer_validator("test", 10)
+except ValueError as e:
+	assert str(e) == "", "Test Case 5 Failed"
