@@ -30,7 +30,6 @@ if __name__ == "__main__":
     print(my_dict)
     print(type(my_dict))
 
-
     try:
         s_my_dict = """
         {"is_active": true, 12}
