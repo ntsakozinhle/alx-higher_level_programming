@@ -4,8 +4,8 @@ file. """
 
 if __name__ == "__main__":
     import sys
-    from 5-save_to_json_file.py import save_to_json_file
-    from 6-load_from_json_file.py import load_from_json_file
+    from 5-save_to_json_file import save_to_json_file
+    from 6-load_from_json_file import load_from_json_file
 
     try:
         existing_list = load_from_json_file("add_item.json")
