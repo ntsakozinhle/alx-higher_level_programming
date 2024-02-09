@@ -20,6 +20,10 @@ class Square(Rectangle):
         self.width = value
         self.height = value
 
+    def to_dictionary(self):
+        """Returns the dictionary representation of the Square"""
+        return {'id': self.id, 'size': self.size, 'x': self.x, 'y': self.y}
+
     def update(self, *args, **kwargs):
         """Assign attributes to the instance"""
         if args:
