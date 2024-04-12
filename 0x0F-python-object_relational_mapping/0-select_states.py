@@ -13,9 +13,14 @@ if __name__ == "__main__":
 
     cursor.execute("SELECT * FROM states ORDER BY id ASC")
 
+    unique_states = set()
+
     results = cursor.fetchall()
 
     for row in results:
-        print(row)
+        state_id, state_name = row
+        if state_name not in unique_states:
+            unique_states.add(state_name)
+            print(row)
 
     db.close()
