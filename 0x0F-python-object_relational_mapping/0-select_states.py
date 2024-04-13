@@ -2,7 +2,18 @@
 import MySQLdb
 import sys
 
+
 def list_states(username, password, database):
+    """
+    Lists all unique states from the 'states table in the specified database.
+
+
+    Parameters:
+    - username: username for MySQL database.
+    - password: password for MySQL database.
+    - database: name of MySQL database.
+    """
+
     conn = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database)
 
     cur = conn.cursor()
@@ -20,6 +31,7 @@ def list_states(username, password, database):
             print(row)
 
     conn.close()
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
