@@ -1,37 +1,25 @@
 #!/usr/bin/python3
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+import MySQLdb
 import sys
 
-Base = declarative_base()
-
-class State(Base):
-    __tablename__ = 'states'
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String(256), nullable=False)
-
 def list_states(username, password, database):
-   try:
-        
-        engine = create_engine(f'mysql+mysqldb://{username}:{password}@localhost/{database}',
-                                pool_pre_ping=True)
+    conn = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database)
 
-        Session = sessionmaker(bind=engine)
+    cur = conn.cursor()
 
-        session = Session()
+    cur.execute("SELECT * FROM states ORDER BY id ASC")
 
-        seen_names = set()
-        for state in session.query(State.id, State.name).distinct().order_by(State.id):
-            if state.name not in seen_names:
-                print(state)
-                seen_names.add(state.name)
+    rows = cur.fetchall()
 
-        session.close()
+    printed_states = set()
 
-   except Exception as e:
-        print("Error:", e)
+    for row in rows:
+        state_id, state_name = row
+        if state_name not in printed_states:
+            printed_states.add(state_name)
+            print(row)
+
+    conn.close()
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
