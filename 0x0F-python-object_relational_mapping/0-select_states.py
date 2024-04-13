@@ -1,37 +1,37 @@
 #!/usr/bin/python3
-import MySQLdb
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 import sys
 
+Base = declarative_base()
+
+class State(Base):
+    __tablename__ = 'states'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(256), nullable=False)
+
 def list_states(username, password, database):
-   conn = None
-   cur = None
    try:
         
-        conn = MySQLdb.connect(host="localhost", port=3306,
-                                user=username, passwd=password,
-                                db=database, charset="utf8")
+        engine = create_engine(f'mysql+mysqldb://{username}:{password}@localhost/{database}',
+                                pool_pre_ping=True)
 
-        cur = conn.cursor()
+        Session = sessionmaker(bind=engine)
 
-        cur.execute("SELECT * FROM states ORDER BY id ASC")
+        session = Session()
 
-        rows = cur.fetchall()
+        seen_names = set()
+        for state in session.query(State.id, State.name).distinct().order_by(State.id):
+            if state.name not in seen_names:
+                print(state)
+                seen_names.add(state.name)
 
-        seen_states = set()
+        session.close()
 
-        for row in rows:
-            state_id, state_name = row
-            if state_name not in seen_states:
-                seen_states.add(state_name)
-                print(row)
-
-   except MySQLdb.Error as e:
-        print("MySQL Error:", e)
-   finally:
-        if cur:
-            cur.close()
-        if conn:
-            conn.close()
+   except Exception as e:
+        print("Error:", e)
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
