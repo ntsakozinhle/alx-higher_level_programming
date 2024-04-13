@@ -13,24 +13,24 @@ def list_states(username, password, database):
     - password: password for MySQL database.
     - database: name of MySQL database.
     """
-
-    conn = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database)
-
-    cur = conn.cursor()
-
-    cur.execute("SELECT * FROM states ORDER BY id ASC")
-
-    rows = cur.fetchall()
-
-    printed_states = set()
-
-    for row in rows:
-        state_id, state_name = row
-        if state_name not in printed_states:
-            printed_states.add(state_name)
-            print(row)
-
-    conn.close()
+    try:
+        conn = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database, charset='utf8')
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM states ORDER BY id ASC")
+        rows = cur.fetchall()
+        printed_states = set()
+        for row in rows:
+            state_id, state_name = row
+            if state_name not in printed_states:
+                printed_states.add(state_name)
+                print(row)
+    except MySQLab.Error as e:
+        print("Error while connecting to MySQL", e)
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 
 if __name__ == "__main__":
