@@ -1,38 +1,31 @@
 #!/usr/bin/python3
+"""
+This script connects to a MySQL database and lists all states whose names
+start with 'N' in ascending order by their ID.
+"""
+
 import MySQLdb
 import sys
 
-def filter_states(username, password, database):
-   try:
-        
-        conn = MySQLdb.connect(host="localhost", port=3306,
-                                user=username, passwd=password,
-                                db=database, charset="utf8")
+def filter_states(user, password, db_name):
+   """
+   Connects to the specified MySQL database and lists all states whose names
+   with 'N'
+   """
+   conn = MySQLdb.connect(host="localhost", port=3306, user=user, passwd=password, db=db_name, charset="utf8")
+   cur = conn.cursor()
 
-        cur = conn.cursor()
+   cur.execute("SELECT * FROM states WHERE name LIKE 'N%'  ORDER BY id ASC")
 
-        cur.execute("SELECT * FROM states WHERE name LIKE 'N%'  ORDER BY id ASC")
+   query_rows = cur.fetchall()
 
-        rows = cur.fetchall()
+   for row in query_rows:
+       print(row)
 
-        for row in rows:
-            print(row)
-
-   except MySQLdb.Error as e:
-        print("MySQL Error:", e)
-   finally:
-        if cur:
-            cur.close()
-        if conn:
-            conn.close()
+   cur.close()
+   conn.close()
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: {} <username> <password> <database>".format(sys.argv[0]))
-        sys.exit(1)
+    user, password, db_name = sys.argv[1], sys.argv[2], sys.argv[3]
 
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-
-    filter_states(username, password, database)
+    filter_states(user, password, db_name)
