@@ -1,45 +1,38 @@
 #!/usr/bin/python3
+"""
+This script connects to a MySQL database and lists all states in ascending
+order by their ID
+"""
+
+
 import MySQLdb
 import sys
 
 
-def list_states(username, password, database):
+def list_states(user, password, db_name):
     """
-    Lists all unique states from the 'states table in the specified database.
-
-
-    Parameters:
-    - username: username for MySQL database.
-    - password: password for MySQL database.
-    - database: name of MySQL database.
+    Lists all unique states from the 'states table in the specified database
     """
-    try:
-        conn = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database, charset='utf8')
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM states ORDER BY id ASC")
-        rows = cur.fetchall()
-        printed_states = set()
-        for row in rows:
-            state_id, state_name = row
-            if state_name not in printed_states:
-                printed_states.add(state_name)
-                print(row)
-    except MySQLab.Error as e:
-        print("Error while connecting to MySQL", e)
-    finally:
-        if cur:
-            cur.close()
-        if conn:
-            conn.close()
+
+    conn = MySQLdb.connect(host="localhost", port=3306, user=user, passwd=password, db=db_name, charset='utf8')
+    cur = conn.cursor()
+
+    cur.execute("SELECT DISTINCT * FROM states ORDER BY id ASC")
+
+    query_rows = cur.fetchall()
+
+    for row in query_rows:
+        print(row)
+
+    cur.close()
+    conn.close()
 
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print("Usage: {} <username> <password> <database>".format(sys.argv[0]))
+        print("Usage: python3 0-select_states.py <mysql_username> <mysql_password> <database_name>")
         sys.exit(1)
 
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
+    user, password, db_name = sys.argv[1], sys.argv[2], sys.argv[3]
 
-    list_states(username, password, database)
+    list_states(user, password, db_name)
