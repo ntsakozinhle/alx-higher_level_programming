@@ -16,9 +16,9 @@ def filter_states(user, password, db_name, state_name):
     conn = MySQLdb.connect(host="localhost", port=3306, user=user, passwd=password, db=db_name, charset="utf8")
     cur = conn.cursor()
 
-    sql_query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC LIMIT 1".format(state_name)
+    sql_query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC LIMIT 1"
 
-    cur.execute(sql_query)
+    cur.execute(sql_query, (state_name,))
 
     query_rows = cur.fetchall()
 
@@ -35,5 +35,7 @@ def filter_states(user, password, db_name, state_name):
 
 if __name__ == "__main__":
     user, password, db_name, state_name = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+
+    state_name = (state_name,)
 
     filter_states(user, password, db_name, state_name)
