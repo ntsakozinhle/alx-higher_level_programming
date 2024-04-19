@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" """
+""" Defines the State class and creates table in database  """
+
+import sys
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -9,7 +11,13 @@ Base = declarative_base()
 class State(Base):
     """
     a class that represents the 'states' table in the database.
+
+    Attributes:
+        id (int): primary key of the state.
+        name (str): name of the state.
     """
+
+
     __tablename__ = 'states'
 
 
