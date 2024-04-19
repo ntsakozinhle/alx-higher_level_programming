@@ -22,7 +22,7 @@ class State(Base):
         name (sqlalchemy.Colum): A string representing the name
         cities (sqlalchemy.Column): Relationship to the City Object
     """
-    __tablename__ = 'cities'
+    __tablename__ = 'states'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     name = Column(String(128), nullable=False)
