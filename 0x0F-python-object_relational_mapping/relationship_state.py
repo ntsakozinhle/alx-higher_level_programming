@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """Defines the State class."""
 
+
 from sqlalchemy import Column, Integer, String
-fromsqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship
 from relationship_city import Base
+
 
 class State(Base):
     """ State class representation.
