@@ -18,18 +18,23 @@ if __name__ == "__main__":
     db_user, db_pass, db_name = sys.argv[1], sys.argv[2], sys.argv[3]
     db_ip = 'localhost'
 
+    # Create an engine to interact with the database
     engine = create_engine(f'mysql+mysqldb://{db_user}:{db_pass}@{db_ip}/{db_name}')
 
 
+    # Create a session
     Session = sessionmaker(bind=engine)
     session = Session()
 
+    # Create the State and City
     california = State(name="California")
     session.add(california)
     session.commit()
 
+    # Create the City
     san_francisco = City(name="San Francisco", state_id=california.id)
     session.add(san_francisco)
     session.commit()
 
+    # Close the session
     session.close()
