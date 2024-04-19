@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Defines the City class."""
+"""
+Defines the City class.
+"""
 
 
 from sqlalchemy import Column, Integer, String, ForeignKey
@@ -8,7 +10,8 @@ from model_state import Base
 
 
 class City(Base):
-    """ City class representation.
+    """
+    City class representation.
 
     Args:
         Base (declarative_base()): Base class from SQLAlchemy.
@@ -17,7 +20,8 @@ class City(Base):
         __tablename__ (str): the name of the mySQL table
         id (sqlalchemy.Column): An auto-generated, unique integer ID
         name (sqlalchemy.Colum): A string representing the name
-        state_id (sqlalchemy.Column): an integer representing th ID of state
+        state_id (sqlalchemy.Column): an integer representing the ID of state
+        state (sqlalchemy.Column): Relationship to the State object
     """
     __tablename__ = 'cities'
 

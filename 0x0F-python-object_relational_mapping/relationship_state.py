@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Defines the State class."""
+"""
+Defines the State class.
+"""
 
 
 from sqlalchemy import Column, Integer, String
@@ -8,7 +10,8 @@ from relationship_city import Base
 
 
 class State(Base):
-    """ State class representation.
+    """
+    State class representation.
 
     Args:
         Base (declarative_base()): Base class from SQLAlchemy.
