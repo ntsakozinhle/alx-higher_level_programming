@@ -17,18 +17,24 @@ def list_cities_by_state(user, password, db_name, state_name):
     conn = MySQLdb.connect(host="localhost", port=3306, user=user, passwd=password, db=db_name, charset="utf8")
     cur = conn.cursor()
 
-    cur.execute("""
-        SELECT cities.id, cities.name
+    sql_query = """
+        SELECT cities.name
         FROM cities
         JOIN states ON cities.state_id = states.id
         Where states.name = %s
         ORDER BY cities.id ASC
-    """, (state_name,))
+    """
+
+    cur.execute(sql_query, (state_name,))
 
     query_rows = cur.fetchall()
 
-    for row in query_rows:
-        print(row)
+    cities =[row[0] for row in query_rows]
+
+    if cities:
+        print(", ".join(cities))
+    else:
+        print("No cities found for the state:", state_name)
 
     cur.close()
     conn.close()
