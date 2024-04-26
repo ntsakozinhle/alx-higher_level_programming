@@ -11,4 +11,10 @@ fi
 # URL to fetch
 URL="$1"
 
-curl -sI "$1" | grep -i Content-Length | awk '{print $2}'
+content_length=$(curl -sI "$1" | grep -i Content-Length | awk '{print $2}')
+
+if [ -z "$content_length" ]; then
+	echo "Content-Length header not found. Size could not be determined."
+else
+	echo "$content_length"
+fi
